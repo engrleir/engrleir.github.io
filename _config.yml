@@ -6,8 +6,8 @@ highlighter:      rouge
 title:            Hydeout
 tagline:          'A Jekyll theme'
 description:      'The <a href="http://hyde.getpoole.com" target="_blank">Hyde</a> theme for <a href="http://jekyllrb.com" target="_blank">Jekyll</a>, refreshed.'
-url:              https://fongandrew.github.io
-baseurl:          
+url:              https://engrleir.github.io
+baseurl:
                   # the optional subpath of your site, e.g. "/blog"
                   # NB: This applies to all pages in your Jekyll site.
                   # If you want to move just the blog index pages but keep
@@ -15,8 +15,9 @@ baseurl:
                   # sidebar_blog_link below.
 
 author:
-  name:           'Andrew Fong'
-  url:            https://twitter.com/fongandrewc
+  name:           'Jan Monsalud'
+
+remote_theme: fongandrew/hydeout
 
 paginate:         5
 # paginate_path:    '/page:num'
@@ -27,7 +28,7 @@ plugins:
   - jekyll-gist
   - jekyll-paginate
 
-  disqus.shortname: engrleir
+disqus.shortname: engrleir
 
 # Sidebar link settings
 sidebar_home_link:  true

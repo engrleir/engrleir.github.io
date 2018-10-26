@@ -1,6 +1,6 @@
 ---
 layout: category
-title: Markup
+title: Engineering-Mathematics
 ---
 
 Another sample category page.

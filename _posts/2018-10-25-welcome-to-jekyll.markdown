@@ -1,7 +1,7 @@
 ---
 layout: post
 date:   2018-10-25 22:22:51 +0800
-categories: jekyll update
+categories: Engineering-Mathematics
 mathjax: true
 ---
 

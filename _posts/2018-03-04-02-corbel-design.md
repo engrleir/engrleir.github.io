@@ -2,6 +2,7 @@
     layout: post
     title: Design of Reinforced Concrete Corbels
     category:
+        - Notes
         - Advance Concrete Design
         - Python
     mathjax: true

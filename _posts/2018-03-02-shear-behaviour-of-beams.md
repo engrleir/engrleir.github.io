@@ -2,6 +2,7 @@
     layout: post
     title: Shear in Beams
     category:
+        - Notes
         - Advance Concrete Design
         - Python
     mathjax: true

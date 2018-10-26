@@ -28,7 +28,8 @@ plugins:
   - jekyll-gist
   - jekyll-paginate
 
-disqus.shortname: engrleir
+disqus:
+  shortname: engrleir
 
 # Sidebar link settings
 sidebar_home_link:  true

@@ -1,0 +1,252 @@
+html,
+body {
+  height: 100%;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+p {
+  font-size: 20px;
+}
+
+p.small {
+  font-size: 16px;
+}
+
+a,
+a:hover,
+a:focus,
+a:active,
+a.active {
+  color: #18bc9c;
+  outline: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.navbar {
+  font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.navbar a:focus {
+  outline: none;
+}
+
+.navbar .navbar-nav {
+  letter-spacing: 1px;
+}
+
+.navbar .navbar-nav li a:focus {
+  outline: none;
+}
+
+.navbar-default,
+.navbar-inverse {
+  border: none;
+  color: white !important;
+}
+
+@media (min-width: 768px) {
+  .navbar-fixed-top {
+    padding: 25px 0;
+    -webkit-transition: padding 0.3s;
+    -moz-transition: padding 0.3s;
+    transition: padding 0.3s;
+  }
+
+  .navbar-fixed-top .navbar-brand {
+    font-size: 2em;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+  }
+
+  .navbar-fixed-top.navbar-shrink {
+    padding: 10px 0;
+  }
+
+  .navbar-fixed-top.navbar-shrink .navbar-brand {
+    font-size: 1.5em;
+  }
+}
+
+.navbar {
+  font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-transform: uppercase;
+  font-weight: 700;
+  background-color: black;
+}
+
+.navbar a:focus {
+  outline: none;
+}
+
+.navbar .navbar-nav {
+  letter-spacing: 1px;
+}
+
+.navbar .navbar-nav li a:focus {
+  outline: none;
+}
+
+.navbar-default,
+.navbar-inverse {
+  border: none;
+}
+
+.navbar-brand {
+  color: white !important;
+}
+
+header {
+  text-align: center;
+  background: url(https://lh3.googleusercontent.com/e50fCUFaa7u9OymZeG99A8MgVpryhivTzJW3gwMFEdJFzVwlVzcZlUSlJecRz-KKa8y7drw7V3UVF9ui_qjOxY8DykHgbq97vtuIdoag0pquW-PsCV84bmifBc2mUCMQg31Jl0nOGvZSVdRdmsx7BhAXuiIZzI0hPAXlG16W-PRtCbHjAg9yl00lHsh7Ue6xnt8fVaL2zLDA4d_VrEDLFFa_nS48_LCsjNyfffHQxw6r7bdkYPb8eNtkDl4xGNYQiR3e8SN5OROGjksfTTkdj80VRf0z7OIzpEIysz3kWPjW_hmVSBl755aAS8u0hF1Fi9xVadvJbH4Ni7I2Nud2Hk1SRDzVW9fAARgi5IqFAQCGRbLnelG0sF7CqbrHoxqaVSP9IZx8W-6zRd_Gk30Etc9t4bRD5HlCtRMWhrdBJjrrEsD6FW9OFHwzSuz1Ynhboe3OJVvydgTHtWupYeXyyKEXTXbI8YxTxOlVqxBCI_EbTUNEoZAEoadAY-FRmKZB7QEm_ZVqC4WHhYw8Sx7fFzeSJPSa-oD2N-wwZisFUK_2IPvBNxG43lZIxDKFHrhU5tw=w1910-h1432-no) no-repeat center center;
+  background-size: cover;
+  color: white;
+  height: 100%;
+}
+
+header .container {
+  padding-top: 100px;
+  padding-bottom: 50px;
+}
+
+header .header-text .header-title {
+  display: block;
+  font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 4.75em;
+}
+
+header .header-text .header-subtitle {
+  font-size: 1.75em;
+  font-weight: 300;
+}
+
+@media (min-width: 768px) {
+  header .container {
+    padding-top: 200px;
+    padding-bottom: 100px;
+  }
+}
+
+hr.light,
+hr.dark {
+  padding: 0;
+  border: none;
+  border-top: solid 5px;
+  text-align: center;
+  max-width: 300px;
+  margin: 25px auto 30px;
+}
+
+hr.light {
+  border-color: white;
+}
+
+hr.light:after {
+  background-color: black;
+  color: white;
+}
+
+hr.dark {
+  border-color: black;
+}
+
+hr.dark:after {
+  background-color: white;
+  color: black;
+}
+
+/* About */
+.profile-pic {
+  display: block;
+  margin: 0 auto 20px;
+  border-style: solid;
+  border-color: black;
+  border-width: 5px;
+  border-radius: 50%;
+}
+
+section {
+  padding: 100px 0;
+}
+
+section h2 {
+  margin: 0;
+  font-size: 3em;
+}
+
+@media (max-width: 767px) {
+  section {
+    padding: 75px 0;
+  }
+
+  section.first {
+    padding-top: 75px;
+  }
+}
+
+
+.social {
+  padding: 100px 0;
+  color: #f8f8f8;
+  background: black;
+  background-size: cover;
+}
+
+.social h2 {
+  margin: 0;
+  text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.6);
+  font-size: 3em;
+}
+
+.social ul {
+  margin-bottom: 0;
+}
+
+.social-buttons {
+  float: left;
+  margin-top: 0;
+  width: 100%;
+  text-align: center;
+}
+
+@media(max-width:1199px) {
+  ul.social-buttons {
+    float: left;
+    margin-top: 15px;
+  }
+}
+
+@media(max-width:767px) {
+  .social h2 {
+    margin: 0;
+    text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.6);
+    font-size: 3em;
+  }
+
+  ul.social-buttons>li {
+    display: block;
+    margin-bottom: 20px;
+    padding: 0;
+  }
+
+  ul.social-buttons>li:last-child {
+    margin-bottom: 0;
+  }
+}

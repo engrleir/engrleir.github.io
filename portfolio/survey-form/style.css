@@ -1,0 +1,95 @@
+html,
+body {
+  height: 100%;
+  background-color: black;
+  overflow-x: hidden;
+}
+
+p {
+  font-size: 20px;
+}
+
+p.small {
+  font-size: 16px;
+}
+
+a,
+a:hover,
+a:focus,
+a:active,
+a.active {
+  color: #18bc9c;
+  outline: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+
+
+.container {
+  border-radius: 1rem;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: whitesmoke;
+  padding: 5rem;
+}
+
+.survey-form {
+  display: flex;
+  flex-direction: column;
+}
+
+
+@media screen and (min-width: 480px) {
+  .container {
+    width: 40%
+  }
+}
+
+.form-group {
+  border: black solid thin;
+  box-shadow: 5px 10px #888888;
+  border-radius: 1rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group>label {
+  padding-top: 10px;
+  padding-bottom: 5px;
+  font-size: large;
+  width: fit-content;
+}
+
+input[type="radio"] {
+  margin-top: -1px;
+  vertical-align: middle;
+}
+
+.form-group>* {
+  padding: 0.5rem;
+}
+
+.form-button-submit {
+  font-size: large;
+  padding: 1rem 4rem;
+  background-color: green;
+  color: white;
+  border-radius: 1rem;
+}
+
+.form-button-submit:hover {
+  background-color: lightgreen;
+}

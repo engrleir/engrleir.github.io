@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EngrLeir's Build a Survey Form FCC Project</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <h1 id="title">EngrLeir's FCC Survey Form</h1>
+      <p id="description">This is my submission for the free code camp build a survey form project.</p>
+    </header>
+    <main>
+
+      <form id="survey-form" class="survey-form">
+        <div class="form-group">
+          <label for="name" id="name-label">Name</label>
+          <input required type="text" name="name" id="name" placeholder="Write your name here.">
+        </div>
+
+        <div class="form-group">
+          <label for="email" id="email-label">Email</label>
+          <input required type="email" name="email" id="email" placeholder="What is your email address?">
+        </div>
+
+        <div class="form-group">
+          <label for="number" id="number-label">Think of a number from 1 to 10.</label>
+          <input type="number" name="number" id="number" min="1" max="10" placeholder="Magic Number">
+        </div>
+
+        <div class="form-group">
+          <label for="dropdown">You are more of a</label>
+          <select name="dropdown" id="dropdown">
+            <option disabled selected value>Pets? You have them?</option>
+            <option value="cat">Cat Person.</option>
+            <option value="dog">Dog Person.</option>
+            <option value="nope">Person. I'm just a person</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>You are a</label>
+          <div class="form-radio">
+            <input type="radio" id="male" name="gender" value="male">
+            <label for="male">Male</label>
+          </div>
+          <div class="form-radio">
+            <input type="radio" id="female" name="gender" value="female">
+            <label for="female">Female</label>
+          </div>
+          <div class="form-radio">
+            <input type="radio" id="other" name="gender" value="other">
+            <label for="other">Other</label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>What is your ride? Check all that applies.</label>
+          <div class="form-checkbox">
+
+            <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+            <label for="vehicle1"> I have a bike</label>
+          </div>
+          <div class="form-checkbox">
+
+            <input type="checkbox" id="vehicle2" name="v
+            ehicle2" value="Car">
+            <label for="vehicle2"> I have a car</label>
+          </div>
+          <div class="form-checkbox">
+
+            <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
+            <label for="vehicle3"> I have a boat</label>
+          </div>
+
+        </div>
+
+        <div class="form-group">
+          <label for="textarea">Write a short thingy about yourself.</label>
+          <textarea name="textarea" id="textarea" cols="30" rows="10"></textarea>
+        </div>
+        <button class='form-button-submit' type="submit" id="submit">Submit</button>
+      </form>
+    </main>
+
+  </div>
+</body>
+
+<script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js" defer></script>
+
+</html>

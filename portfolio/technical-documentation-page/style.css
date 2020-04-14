@@ -1,0 +1,85 @@
+/* Base styles (mobile) */
+
+p,
+li {
+  font-family: "Lato",
+    "Helvetica Neue",
+    Helvetica,
+    Arial,
+    sans-serif;
+}
+
+header {
+  font-family: "Montserrat",
+    "Helvetica Neue",
+    Helvetica,
+    Arial,
+    sans-serif;
+}
+
+#navbar {
+  background-color: gray;
+}
+
+#navbar header {
+  font-size: 2rem;
+  font-weight: 700;
+  padding: 1rem
+}
+
+#navbar ul {
+  padding-inline-start: 0;
+}
+
+#navbar li {
+  list-style: none;
+  font-size: 1.5rem;
+  padding: 1rem;
+}
+
+#navbar li:hover {
+  background-color: blue;
+}
+
+#navbar a {
+  text-decoration: none;
+  color: white;
+}
+
+#main-doc {
+  padding: 1rem;
+}
+
+#main-doc header {
+  font-size: 2.5rem;
+  ;
+}
+
+.main-section {
+  margin-bottom: 2rem;
+  max-width: 800px
+}
+
+pre {
+  color: green;
+  font-size: 1.1rem;
+  background-color: #222;
+  border-radius: 10px;
+  overflow: auto;
+}
+
+
+/* Styles when not mobile */
+@media screen and (min-width: 40em) {
+  #navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 220px;
+  }
+
+  #main-doc {
+    margin-left: 220px;
+  }
+}

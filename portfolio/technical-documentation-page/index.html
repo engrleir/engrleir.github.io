@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EngrLeir's Build a Technical Documentation Page FCC Project</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <nav id="navbar">
+    <header>Optimizing Rebar Cutting</header>
+    <ul>
+      <li><a href="#Introduction" class="nav-link">Introduction</a></li>
+      <li><a href="#A_Greedy_Algorithm" class="nav-link">A Greedy Algorithm</a></li>
+      <li><a href="#A_Similar_Kind_of_Problem" class="nav-link">A Similar Kind of Problem</a></li>
+      <li><a href="#Producing_New_Patterns" class="nav-link">Producing New Patterns</a></li>
+      <li><a href="#The_Optimal_Solution" class="nav-link">The Optimal Solution</a></li>
+      <li><a href="#References" class="nav-link">References</a></li>
+    </ul>
+  </nav>
+
+  <main id="main-doc">
+
+    <section class="main-section" id="Introduction">
+      <header>Introduction</header>
+      <p>
+        When doing construction work, one of the tasks is to cut rebars into required lengths. For example, if we need
+        two bars of length 3.5 meters and 2 meters, we could get one 6-meter long bar and cut it into the required
+        lengths - with the remaining 0.5 meter considered as wastage.
+      </p>
+
+      <p>For small projects, the wastages are insignificant to the cost of the project. But for larger projects
+        involving hundreds or even thousands of required cuttings, the wastages can easily pile.</p>
+
+      <p>This document will discuss how to minimize the wastages and optimize the cutting patterns given a length of
+        available rebar.</p>
+
+      <p>We will try to answer the following problem: The required lengths of rebars for a construction project are
+        shown below:</p>
+
+      <table>
+        <tr>
+          <th>Required Length</th>
+          <th>Number of Pieces</th>
+        </tr>
+        <tr>
+          <td>4.5 m</td>
+          <td>97 pcs</td>
+        </tr>
+        <tr>
+          <td>3.4 m</td>
+          <td>610 pcs</td>
+        </tr>
+        <tr>
+          <td>2.5 m</td>
+          <td>395 pcs</td>
+        </tr>
+        <tr>
+          <td>2.3 m</td>
+          <td>211 pcs</td>
+        </tr>
+      </table>
+
+      <p>If the available length of a rebar is 11.7 meters, what is the minimum amount of rebars that can be used?</p>
+
+    </section>
+
+    <section class="main-section" id="A_Greedy_Algorithm">
+      <header>A Greedy Algorithm</header>
+
+      <p>The first solution I thought of can be summarize using the following steps:</p>
+      <ol>
+        <li>Start with one uncut bar.</li>
+        <li>Create a sorted list of all the required bar lengths.</li>
+        <li>Get the longest required length and cut it from the uncut bar.</li>
+        <li>Get the next longest required length and continue cutting it from the uncut bar.</li>
+        <li>If no available space is left, get another uncut bar.</li>
+        <li>Repeat the process of getting the longest required length.</li>
+      </ol>
+      <p>I later found out that this is also called the <strong>First-Fit Decreasing</strong> bin packing algorithms.
+        Here's the python implementation of the algorithm</p>
+
+      <pre><code>
+          # A script for optimising the cutting of rebars in to designated lengths
+
+          from collections import Counter
+
+
+          def FFD(r,L):
+          ''' The algorithm cuts the largest size from a bar,
+          if there is no space remaining, get another bar.
+          The process repeats until all required lengths are placed.
+          '''
+
+            # list of remaining length in a single bar
+            remaining = [L]
+
+            # list of cuts
+            cuttingList = [[]]
+
+            for length in sorted(r, reverse=True):
+              for i, free in enumerate(remaining):
+                if free >= length:
+                  remaining[i] -= length
+                  cuttingList[i].append(length)
+                  break
+              else:
+                # this else block runs if the for loop
+                # is not terminated by a break, that is, if
+                # the remaining length is less than the
+                # current required bar length
+                cuttingList.append([length])
+                remain.append(L-length)
+
+          return cuttingList
+        </code></pre>
+
+      <p>
+        Calling the function and supplying the necessary data, we get the following answer
+      </p>
+
+      <pre><code>
+          # Length of a single bar
+          L = 11.7
+
+          # Required lengths
+          r = [4.5, 3.4, 2.5, 2.3]
+
+          # required quantity for each length
+          q = [97, 610, 395, 211]
+
+          # Array containing list of all required bars
+          s=[]
+          for j in range(len(r)):
+            for i in range(q[j]):
+              s.append(r[j])
+
+          # Solve the cutting stock problem using First-Fit Decreasing
+          solution = FFD(s,L)
+          counts = Counter(tuple(x) for x in solution)
+          print("Required Lengths:")
+          for i in counts:
+            print("{} pcs at {} m".format(counts[i],i))
+
+          print("You need {} pcs of {} m bars".format(len(solution), L))
+
+          ''' This will Output:
+                Required Cutting Patterns:
+                48 pcs at (4.5, 4.5, 2.5) m
+                1 pcs at (4.5, 3.4, 3.4) m
+                202 pcs at (3.4, 3.4, 3.4) m
+                1 pcs at (3.4, 3.4, 2.5, 2.3) m
+                86 pcs at (2.5, 2.5, 2.5, 2.5) m
+                1 pcs at (2.5, 2.5, 2.3, 2.3) m
+                41 pcs at (2.3, 2.3, 2.3, 2.3, 2.3) m
+                1 pcs at (2.3, 2.3, 2.3) m
+                You need 381 pcs of 11.7 m bars
+          '''
+        </code></pre>
+
+      <p>As you can see, the algorithm shows as the cutting patters we should do and it's telling us we need 381 pcs of
+        11.7 m bars. <strong>But we can do better.</strong></p>
+
+    </section>
+
+    <section class="main-section" id="A_Similar_Kind_of_Problem">
+      <header>A Similar Kind of Problem</header>
+      <p>When researching the problem in the internet, I stumbled upon a type of problem very similar to this. It is
+        called the <strong>Cutting-Stock Problem</strong>. In this problem, paper of different lengths is to be cut from
+        rolls of paper with a given length. The goal is to minimized the amount of waste paper.</p>
+
+      <p>Solutions for the Cutting-Stock Problem is still being researched today. The most popular/earliest solution
+        involves what we call a column-generation algorithm and using a knapsack algorithm to generate the columns.</p>
+
+      <p>First, let us define how to represent our data.</p>
+
+      <p>Required cutting lengths and the number of pieces for each will be represented by arrays. We will use the
+        <code>numpy</code> package for our
+        solution</p>
+      <pre><code>
+        import numpy as np
+
+        # Length of a single bar
+        barLength = 11.7
+
+        # Array of required cutting lengths
+        lengths = np.array([4.5, 3.4, 3.5, 2.3])
+
+        # Number of pieces corresponding to each required length
+        quantities = np.array([97, 610, 395, 211])
+      </code></pre>
+
+      <p>We will represent cutting patterns as column vectors containing how many pieces of a given length is present in
+        the pattern.</p>
+
+      <pre><code>
+        2 1 1 0
+        0 1 0 1
+        0 0 0 2
+        0 0 1 0
+      </code></pre>
+
+      <p>The matrix shown has four columns which represents four cutting patterns. The first column <code>2 0 0 0</code>
+        represent a pattern where we cut two 4.5 m lengths from the rebar which yields 2.7 m of waste. Remember we are
+        using 11.7 m bars for our example. The second column <code>1 1 0 0</code> represents a cut of 4.5 m and 3.4 m
+        with a waste of 3.8 m. The other columns follow similarly with one cut of 4.5 m and one cut of 2.3 m for the
+        third column and one cut of 3.4 m and two cuts of 2.5 m for the fourth column.</p>
+
+      <p>These are the steps we will follow for this solution:</p>
+      <ol>
+        <li>Generate a basic cutting pattern. This will be based on how many pieces of each cut length can we fit in the
+          given rebar length. For our example, we can fit two 4.5 m lengths in one 11.7 m bar, so the first cutting
+          pattern is <code>2 0 0 0</code>. The whole matrix of cutting patterns for each cut length is given below:
+          <pre><code>
+          2 0 0 0
+          0 3 0 0
+          0 0 4 0
+          0 0 0 5
+        </code></pre>
+          <p>In python this is</p>
+          <pre><code>
+          # total size of all lumber required
+          pieces_total = np.sum(quantities)
+
+          # number of unique pieces which are required
+          pieces_types = len(lengths)
+
+          # initialize the patterns A for cutting the stock
+          diag = np.floor((barLength)/(lengths).astype(float))
+          patterns = np.zeros((pieces_types, pieces_types))
+          np.fill_diagonal(patterns, diag)
+        </code></pre>
+        </li>
+
+        <li>Solve for the required number of bars using the patterns. This can be computed by solving the linear
+          equation <code>[patterns][number of bars] = [required quantities]</code>
+          <pre><code>
+          num_bars = np.linalg.solve(patterns,quantities)
+        </code></pre>
+        </li>
+
+        <li>
+          We begin producing a new pattern using a custom <code>knapsack</code> function that we will show in the next
+          section. The function will return a new cutting pattern and some kind of score/criteria that says it is a
+          better pattern than what currently exist.
+
+          <pre><code>
+             # (sum^m)_i (yi * ai) > 1
+             y = np.linalg.solve(patterns.T, np.ones(pieces_types))
+
+             # entering pattern (ep)
+             ep, zj = knapsack(lengths, y, barLength, precision)
+          </code></pre>
+
+        </li>
+        <li>We then replace one of the columns with the new pattern, selecting the column in which it will have the
+          greatest effect.
+
+          <pre><code>
+            # test if zj > 1
+            if(zj>1):
+              # find to which column we place the new pattern
+              pj = np.linalg.solve(patterns,ep)
+
+              theta = [0]*len(pj)
+              for i in range(len(pj)):
+                if(pj[i]!=0):
+                  theta[i] = num_bars[i]/pj[i]
+
+              new_col = theta.index(min([i for i in theta if i > 0]))
+
+              patterns[:,[new_col]] = np.array([ep]).T
+          </code></pre>
+        </li>
+        <li>We then repeat the process from step 2 until we could no longer produce patterns that are better than what
+          we have or we have reached the maximum number of iterations.
+          <pre>
+            <code>
+              for _ in range(maxsteps):
+            </code>
+          </pre>
+        </li>
+        <li>We output the patterns and the number of bars required for these set of patterns
+
+          <pre><code>
+        return patterns,num_bars
+      </code></pre>
+        </li>
+      </ol>
+
+      <p>We put all of this in a function <code>csp(lengths, quantities, barLength, precision=100., maxsteps=100)</code>
+      </p>
+
+      <pre><code>
+        def csp(lengths, quantities, barLength=6.0, precision=100., maxsteps=100):
+          # total size of all lumber required
+          pieces_total = np.sum(quantities)
+
+          # number of unique pieces which are required
+          pieces_types = len(lengths)
+
+          # initialize the patterns A for cutting the stock
+          diag = np.floor((barLength)/(lengths).astype(float))
+          patterns = np.zeros((pieces_types, pieces_types))
+          np.fill_diagonal(patterns, diag)
+
+          for _ in range(maxsteps):
+            # the required number of bars using the given patterns
+            num_bars = np.linalg.solve(patterns, quantities)
+
+            # (sum^m)_i (yi * ai) > 1
+            y = np.linalg.solve(patterns.T, np.ones(pieces_types))
+
+            # entering pattern (ep)
+            ep, zj = knapsack(lengths, y, barLength, precision)
+
+            # test if zj > 1
+            if(zj>1):
+              # find to which column we place the new pattern
+              pj = np.linalg.solve(patterns,ep)
+
+              theta = [0]*len(pj)
+              for i in range(len(pj)):
+              if(pj[i]!=0):
+              theta[i] = num_bars[i]/pj[i]
+
+              new_col = theta.index(min([i for i in theta if i > 0]))
+
+              patterns[:,[new_col]] = np.array([ep]).T
+
+          return patterns,num_bars
+      </code></pre>
+    </section>
+
+    <section class="main-section" id="Producing_New_Patterns">
+      <header>Producing New Patterns</header>
+      <p>The new pattern that we will generate should minimize the waste and there should be an attribute where we could
+        somehow judge that it is a better pattern. This can be solved as a type of a knapsack problem.</p>
+
+      <p>The knapsack problem can be solved using a dynamic-programming technique. The knapsack problem in context of
+        our rebar cutting problem, can be described as fitting in the rebars while minimizing the waste and maximizing
+        the <em>value</em>. The value here will be the <em>y</em> values we got from the preceding steps.</p>
+
+      <p>The code below is based on <a
+          href="https://dev.to/downey/solving-the-knapsack-problem-with-dynamic-programming-4hce">this link</a> which I
+        modified to fit our problem.</p>
+
+      <pre><code>
+        def knapsack(weights, values, capacity, precision=10):
+          W=[0]
+          V=[0]
+          C = int(capacity*precision)
+
+          W.extend([int(weight*precision) for weight in weights])
+          V.extend(values)
+
+          n = len(V)
+
+          sack = dict(zip(range(C+1), [(0,[0]*n)]*(C+1)))
+
+          for w in range(1, C+1):
+            max_value = 0
+            for i in range(1, n):
+              wi = W[i]
+              vi = V[i]
+              if wi <= w: new_value=sack[w-wi][0]+vi
+                if new_value> max_value:
+                  sack[w]=(new_value,sack[w-wi][1][:])
+                  sack[w][1][i] +=1
+                  max_value = new_value
+
+          return np.array(sack[C][1][1:]), sack[C][0]
+      </code></pre>
+    </section>
+
+    <section class="main-section" id="The_Optimal_Solution">
+      <header>The Optimal Solution</header>
+      <p>We are now ready to solve the problem.</p>
+
+      <pre>
+        <code>
+          # Required cutting lengths
+          lengths = np.array([4.5, 3.4, 2.5, 2.3,])
+
+          # Required quantity for each length
+          quantities = np.array([97, 610, 395, 211])
+
+          # Length of a single bar
+          barLength = 11.7
+
+          patterns, pcs = csp(lengths, quantities, barLength)
+
+          for i in range(len(patterns)):
+            print("Pattern: {} at {} pcs".format(np.round(patterns[i],2),np.round(pcs[i],0)))
+
+          print("Total number of bars: {} pcs".format(np.round(pcs,0).sum()))
+        
+          ''' The output:
+              Pattern: [2. 1. 0. 0.] at 16.0 pcs
+              Pattern: [0. 2. 1. 2.] at 66.0 pcs
+              Pattern: [1. 0. 3. 1.] at 56.0 pcs
+              Pattern: [0. 0. 0. 1.] at 211.0 pcs
+              Total number of bars: 349.0 pcs
+          '''
+        </code>
+      </pre>
+
+      <p>With this we have a better solution using only 4 patterns and just 349 pieces of 11.7 meter rebar. Recall that
+        in the
+        first
+        solution we got 381 pieces - and that's a lot of difference.</p>
+    </section>
+
+    <section class="main-section" id="References">
+      <header>References</header>
+      <ul>
+        <li><a href="https://en.wikipedia.org/wiki/Bin_packing_problem">Wikipedia article on the bin-packing problem</a>
+        </li>
+        <li><a href="https://en.wikipedia.org/wiki/Cutting_stock_problem">Wikipedia article on the cutting-stock
+            problem</a>
+        </li>
+        <li><a href="https://www.youtube.com/watch?v=NoiPrt4OsQA">NPTEL lecture on the cuttingstock problem part 1</a>
+        </li>
+        <li><a href="https://www.youtube.com/watch?v=coLQ8EfZTQI">NPTEL lecture on the cutting-stock problem part 2</a>
+        </li>
+        <li><a href="https://dev.to/downey/solving-the-knapsack-problem-with-dynamic-programming-4hce">Solving the
+            knapsack problem with dynamic programming</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <!-- <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script> -->
+
+</body>
+
+</html>
